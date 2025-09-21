@@ -333,6 +333,10 @@
 <input type="radio" name="category" value="womens" class="custom-radio mr-3">
 <span class="text-sm text-gray-700">Women's</span>
 </label>
+                                    <label class="flex items-center cursor-pointer">
+<input type="radio" name="category" value="unisex" class="custom-radio mr-3">
+<span class="text-sm text-gray-700">Unisex</span>
+</label>
                                 </div>
                             </div>
                         </div>
@@ -340,7 +344,7 @@
                 </aside>
                 <main class="flex-1">
                     <div class="flex flex-col sm:flex-row justify-between items-start sm:items-center mb-6 gap-4">
-                        <p class="text-gray-600">Showing 12 products</p>
+                        <p id="productCount" class="text-gray-600">Showing 12 products</p>
                         <div class="relative">
                             <button class="sort-dropdown-btn flex items-center gap-2 px-4 py-2 bg-white border border-gray-200 rounded-lg text-sm hover:border-gray-300 transition-colors">
 <span>Default</span>
@@ -359,7 +363,7 @@
                         </div>
                     </div>
                     <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="best" data-category="mens">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-secondary text-white px-2 py-1 rounded text-xs font-medium">BEST</span>
@@ -382,7 +386,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="action" data-category="womens">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">Action</span>
@@ -405,7 +409,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="brilliant" data-category="kids">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-medium">Brilliant</span>
@@ -428,7 +432,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="chinese" data-category="unisex">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-orange-600 text-white px-2 py-1 rounded text-xs font-medium">Chinese</span>
@@ -451,7 +455,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="walkaroo" data-category="mens">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-purple-600 text-white px-2 py-1 rounded text-xs font-medium">Walkaroo</span>
@@ -474,7 +478,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="best" data-category="womens">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-secondary text-white px-2 py-1 rounded text-xs font-medium">BEST</span>
@@ -497,7 +501,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="action" data-category="kids">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-blue-600 text-white px-2 py-1 rounded text-xs font-medium">Action</span>
@@ -520,7 +524,7 @@
                                 </div>
                             </div>
                         </a>
-                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300">
+                        <a href="product.html" class="product-card bg-white rounded-lg shadow-sm border border-gray-100 overflow-hidden cursor-pointer hover:shadow-lg transition-all duration-300" data-brand="brilliant" data-category="mens">
                             <div class="relative">
                                 <div class="absolute top-3 left-3 z-10">
                                     <span class="bg-green-600 text-white px-2 py-1 rounded text-xs font-medium">Brilliant</span>
@@ -651,53 +655,14 @@
                 });
             }
 
-            function filterProducts(searchTerm) {
-                searchTerm = searchTerm.toLowerCase().trim();
-                let hasResults = false;
-                productTitles.forEach((title, index) => {
-                    const card = title.closest('.product-card');
-                    const productName = title.textContent.toLowerCase();
-                    const brandTag = card.querySelector('.absolute span').textContent.toLowerCase();
-                    const matches = productName.includes(searchTerm) || brandTag.includes(searchTerm);
-                    if (matches) {
-                        hasResults = true;
-                        card.style.display = '';
-                        setTimeout(() => {
-                            card.style.opacity = '1';
-                            card.style.transform = 'translateY(0)';
-                        }, index * 50);
-                    } else {
-                        setTimeout(() => {
-                            card.style.opacity = '0';
-                            card.style.transform = 'translateY(20px)';
-                            setTimeout(() => {
-                                card.style.display = 'none';
-                            }, 300);
-                        }, index * 30);
-                    }
-                });
-                return hasResults;
-            }
             let searchTimeout;
             searchInput.addEventListener('input', function(e) {
                 const searchTerm = this.value;
                 clearTimeout(searchTimeout);
                 this.classList.add('animate-pulse-soft');
                 searchTimeout = setTimeout(() => {
-                    if (searchTerm) {
-                        const hasResults = filterProducts(searchTerm);
-                        if (!hasResults) {
-                            productCards.forEach(card => {
-                                card.style.opacity = '0';
-                                card.style.transform = 'translateY(20px)';
-                                setTimeout(() => card.style.display = 'none', 300);
-                            });
-                        }
-                    } else {
-                        productCards.forEach(card => {
-                            card.style.display = '';
-                        });
-                        animateCards(productCards);
+                    if (typeof updateProducts === 'function') {
+                        updateProducts();
                     }
                     this.classList.remove('animate-pulse-soft');
                 }, 150);
@@ -724,16 +689,96 @@
         document.addEventListener('DOMContentLoaded', function() {
             const brandRadios = document.querySelectorAll('input[name="brand"]');
             const categoryRadios = document.querySelectorAll('input[name="category"]');
+            const productCountDisplay = document.getElementById('productCount');
+            const productCards = document.querySelectorAll('.product-card');
+            
+            function animateCard(card, show, delay = 0) {
+                setTimeout(() => {
+                    if (show) {
+                        card.style.display = '';
+                        setTimeout(() => {
+                            card.style.opacity = '1';
+                            card.style.transform = 'translateY(0)';
+                        }, 50);
+                    } else {
+                        card.style.opacity = '0';
+                        card.style.transform = 'translateY(20px)';
+                        setTimeout(() => {
+                            card.style.display = 'none';
+                        }, 300);
+                    }
+                }, delay);
+            }
 
             function updateProducts() {
-                console.log('Filters updated');
+                const selectedBrand = document.querySelector('input[name="brand"]:checked').value;
+                const selectedCategory = document.querySelector('input[name="category"]:checked').value;
+                let visibleCount = 0;
+
+                // Get current search term if any
+                const searchInput = document.getElementById('searchInput');
+                const searchTerm = searchInput ? searchInput.value.toLowerCase().trim() : '';
+
+                productCards.forEach((card, index) => {
+                    const brand = card.dataset.brand;
+                    const category = card.dataset.category;
+                    const productName = card.querySelector('h3').textContent.toLowerCase();
+                    const brandKey = card.dataset.brand;
+                    
+                    // Map brand keys to human-readable labels for search
+                    const brandLabels = {
+                        'best': 'best',
+                        'action': 'action',
+                        'brilliant': 'brilliant',
+                        'chinese': 'chinese',
+                        'walkaroo': 'walkaroo'
+                    };
+                    
+                    const matchesBrand = selectedBrand === 'all' || brand === selectedBrand;
+                    const matchesCategory = selectedCategory === 'all' || category === selectedCategory;
+                    const matchesSearch = !searchTerm || 
+                        productName.includes(searchTerm) || 
+                        brandKey.includes(searchTerm) || 
+                        (brandLabels[brandKey] && brandLabels[brandKey].includes(searchTerm));
+                    
+                    const shouldShow = matchesBrand && matchesCategory && matchesSearch;
+                    
+                    if (shouldShow) {
+                        visibleCount++;
+                        animateCard(card, true, index * 50);
+                    } else {
+                        animateCard(card, false, index * 30);
+                    }
+                });
+
+                // Update product count display
+                productCountDisplay.textContent = `Showing ${visibleCount} product${visibleCount !== 1 ? 's' : ''}`;
             }
+
+            // Add change event listeners for filters
             brandRadios.forEach(radio => {
                 radio.addEventListener('change', updateProducts);
             });
+
             categoryRadios.forEach(radio => {
                 radio.addEventListener('change', updateProducts);
             });
+
+            // Integrate with existing search functionality
+            const searchInput = document.getElementById('searchInput');
+            const originalSearchHandler = searchInput.oninput;
+            searchInput.oninput = function(e) {
+                clearTimeout(this.searchTimeout);
+                this.classList.add('animate-pulse-soft');
+                
+                this.searchTimeout = setTimeout(() => {
+                    updateProducts();
+                    this.classList.remove('animate-pulse-soft');
+                }, 150);
+            };
+
+            // Initial update to set correct product count
+            updateProducts();
         });
     </script>
     <script id="mobile-menu-script">
