@@ -14,6 +14,21 @@
         :where([class^="ri-"])::before {
             content: "\f3c2";
         }
+        
+        /* Custom scrolling behavior */
+        .scrollbar-hide {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+        .scrollbar-hide::-webkit-scrollbar {
+            display: none;
+        }
+        
+        /* Smooth scrolling for flex containers */
+        .smooth-scroll {
+            scroll-behavior: smooth;
+            -webkit-overflow-scrolling: touch;
+        }
     </style>
     <script>
         tailwind.config = {
@@ -155,8 +170,10 @@ Explore Now
                     </div>
                     <p class="text-gray-600 text-lg">Premium PU Slippers Collection</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                <div class="relative">
+                    <div class="flex flex-nowrap overflow-x-auto gap-6 pb-4 scrollbar-hide smooth-scroll" data-scroller>
+                        <div class="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none transition-opacity duration-300" data-scroll-hint></div>
+                        <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Premium%20PU%20leather%20slippers%20for%20men%20in%20brown%20color%20with%20comfortable%20sole%20and%20modern%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20quality%20craftsmanship%20and%20elegant%20finish&width=300&height=300&seq=best-001&orientation=squarish"
                                 alt="PU Slipper" class="w-full h-full object-cover object-top">
@@ -172,7 +189,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Stylish%20PU%20slippers%20for%20women%20in%20black%20color%20with%20comfortable%20padding%20and%20modern%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20premium%20quality%20and%20elegant%20appearance&width=300&height=300&seq=best-002&orientation=squarish"
                                 alt="PU Slipper" class="w-full h-full object-cover object-top">
@@ -188,7 +205,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Premium%20PU%20slippers%20in%20navy%20blue%20color%20with%20ergonomic%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20quality%20materials%20and%20modern%20styling&width=300&height=300&seq=best-003&orientation=squarish"
                                 alt="PU Slipper" class="w-full h-full object-cover object-top">
@@ -204,7 +221,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Luxury%20PU%20slippers%20in%20tan%20color%20with%20premium%20finish%20and%20comfortable%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20high%20quality%20craftsmanship%20and%20elegant%20style&width=300&height=300&seq=best-004&orientation=squarish"
                                 alt="PU Slipper" class="w-full h-full object-cover object-top">
@@ -234,8 +251,10 @@ View Details
                     </div>
                     <p class="text-gray-600 text-lg">Comfortable PU Slippers for Every Occasion</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                <div class="relative">
+                    <div class="flex flex-nowrap overflow-x-auto gap-6 pb-4 scrollbar-hide smooth-scroll" data-scroller>
+                        <div class="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none transition-opacity duration-300" data-scroll-hint></div>
+                        <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Walkaroo%20brand%20PU%20slippers%20in%20maroon%20color%20with%20comfortable%20sole%20and%20modern%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20quality%20and%20comfort%20features&width=300&height=300&seq=walkaroo-001&orientation=squarish"
                                 alt="Walkaroo Slipper" class="w-full h-full object-cover object-top">
@@ -251,7 +270,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Walkaroo%20PU%20slippers%20in%20grey%20color%20with%20ergonomic%20design%20and%20comfortable%20padding%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20modern%20style%20and%20quality&width=300&height=300&seq=walkaroo-002&orientation=squarish"
                                 alt="Walkaroo Slipper" class="w-full h-full object-cover object-top">
@@ -267,7 +286,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Premium%20Walkaroo%20PU%20slippers%20in%20olive%20green%20color%20with%20comfortable%20sole%20and%20modern%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20durability%20and%20style&width=300&height=300&seq=walkaroo-003&orientation=squarish"
                                 alt="Walkaroo Slipper" class="w-full h-full object-cover object-top">
@@ -283,7 +302,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Walkaroo%20brand%20PU%20slippers%20in%20burgundy%20color%20with%20ergonomic%20comfort%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20premium%20quality%20and%20modern%20appeal&width=300&height=300&seq=walkaroo-004&orientation=squarish"
                                 alt="Walkaroo Slipper" class="w-full h-full object-cover object-top">
@@ -316,8 +335,10 @@ View Details
                         <i class="ri-time-line mr-2"></i> Sneakers Coming Soon
                     </div>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                <div class="relative">
+                    <div class="flex flex-nowrap overflow-x-auto gap-6 pb-4 scrollbar-hide smooth-scroll" data-scroller>
+                        <div class="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none transition-opacity duration-300" data-scroll-hint></div>
+                        <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Action%20brand%20EVA%20footwear%20in%20black%20color%20with%20comfortable%20sole%20and%20modern%20athletic%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20durability%20and%20comfort%20features&width=300&height=300&seq=action-001&orientation=squarish"
                                 alt="EVA Footwear" class="w-full h-full object-cover object-top">
@@ -333,7 +354,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Action%20brand%20school%20shoes%20in%20black%20leather%20with%20comfortable%20sole%20and%20formal%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20quality%20craftsmanship%20and%20durability&width=300&height=300&seq=action-002&orientation=squarish"
                                 alt="School Shoes" class="w-full h-full object-cover object-top">
@@ -349,7 +370,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <div class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 opacity-60">
+                    <div class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 opacity-60">
                         <div class="h-64 overflow-hidden relative">
                             <img src="https://readdy.ai/api/search-image?query=Action%20brand%20sneakers%20in%20white%20and%20blue%20color%20with%20modern%20athletic%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20sporty%20style%20and%20quality&width=300&height=300&seq=action-003&orientation=squarish"
                                 alt="Sneakers Coming Soon" class="w-full h-full object-cover object-top">
@@ -382,8 +403,10 @@ Notify Me
                     </div>
                     <p class="text-gray-600 text-lg">Premium Sneakers Collection</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                <div class="relative">
+                    <div class="flex flex-nowrap overflow-x-auto gap-6 pb-4 scrollbar-hide smooth-scroll" data-scroller>
+                        <div class="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none transition-opacity duration-300" data-scroll-hint></div>
+                        <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Brilliant%20brand%20premium%20sneakers%20in%20white%20and%20red%20color%20with%20modern%20athletic%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20sporty%20elegance%20and%20quality&width=300&height=300&seq=brilliant-001&orientation=squarish"
                                 alt="Brilliant Sneakers" class="w-full h-full object-cover object-top">
@@ -399,7 +422,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Brilliant%20brand%20sneakers%20in%20black%20and%20grey%20color%20with%20premium%20design%20and%20comfortable%20athletic%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20modern%20style%20and%20quality&width=300&height=300&seq=brilliant-002&orientation=squarish"
                                 alt="Brilliant Sneakers" class="w-full h-full object-cover object-top">
@@ -415,7 +438,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Brilliant%20brand%20premium%20sneakers%20in%20navy%20blue%20and%20white%20color%20with%20athletic%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20sporty%20sophistication&width=300&height=300&seq=brilliant-003&orientation=squarish"
                                 alt="Brilliant Sneakers" class="w-full h-full object-cover object-top">
@@ -431,7 +454,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Brilliant%20brand%20luxury%20sneakers%20in%20burgundy%20and%20gold%20color%20with%20premium%20athletic%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20elegance%20and%20quality&width=300&height=300&seq=brilliant-004&orientation=squarish"
                                 alt="Brilliant Sneakers" class="w-full h-full object-cover object-top">
@@ -461,8 +484,10 @@ View Details
                     </div>
                     <p class="text-gray-600 text-lg">Sandals & Flip-Flops Collection</p>
                 </div>
-                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                <div class="relative">
+                    <div class="flex flex-nowrap overflow-x-auto gap-6 pb-4 scrollbar-hide smooth-scroll" data-scroller>
+                        <div class="absolute right-0 top-0 bottom-4 w-24 bg-gradient-to-l from-white/80 to-transparent pointer-events-none transition-opacity duration-300" data-scroll-hint></div>
+                        <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Chinese%20brand%20comfortable%20sandals%20in%20brown%20leather%20with%20adjustable%20straps%20and%20cushioned%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20casual%20elegance%20and%20comfort&width=300&height=300&seq=chinese-001&orientation=squarish"
                                 alt="Chinese Sandals" class="w-full h-full object-cover object-top">
@@ -478,7 +503,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Chinese%20brand%20flip%20flops%20in%20blue%20color%20with%20comfortable%20rubber%20sole%20and%20modern%20design%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20casual%20style%20and%20durability&width=300&height=300&seq=chinese-002&orientation=squarish"
                                 alt="Chinese Flip-Flops" class="w-full h-full object-cover object-top">
@@ -494,7 +519,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Chinese%20brand%20premium%20sandals%20in%20black%20leather%20with%20elegant%20design%20and%20comfortable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20lighting%20showcasing%20sophisticated%20style%20and%20quality&width=300&height=300&seq=chinese-003&orientation=squarish"
                                 alt="Chinese Premium Sandals" class="w-full h-full object-cover object-top">
@@ -510,7 +535,7 @@ View Details
                             </div>
                         </div>
                     </a>
-                    <a href="product.html" class="product-card bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
+                    <a href="product.html" class="product-card flex-shrink-0 w-72 sm:w-80 bg-white rounded-xl shadow-lg overflow-hidden hover:shadow-2xl transition-all duration-300 transform hover:-translate-y-2 hover:scale-105 block group">
                         <div class="h-64 overflow-hidden">
                             <img src="https://readdy.ai/api/search-image?query=Chinese%20brand%20stylish%20flip%20flops%20in%20green%20color%20with%20comfortable%20design%20and%20durable%20sole%20photographed%20on%20clean%20white%20background%20with%20professional%20studio%20lighting%20showcasing%20modern%20casual%20style&width=300&height=300&seq=chinese-004&orientation=squarish"
                                 alt="Chinese Stylish Flip-Flops" class="w-full h-full object-cover object-top">
@@ -646,6 +671,49 @@ View Details
                     if (!target) return; // No preventDefault if element not on this page
                     e.preventDefault();
                     target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                });
+            });
+        });
+    </script>
+    <script id="scroll-hint-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const scrollers = document.querySelectorAll('[data-scroller]');
+            
+            const observerOptions = {
+                root: null,
+                threshold: 1.0
+            };
+            
+            scrollers.forEach(scroller => {
+                const scrollHint = scroller.querySelector('[data-scroll-hint]');
+                
+                // Show/hide scroll hint based on scroll position
+                const updateScrollHint = () => {
+                    const isAtEnd = Math.abs(
+                        scroller.scrollWidth - scroller.clientWidth - scroller.scrollLeft
+                    ) < 1;
+                    scrollHint.style.opacity = isAtEnd ? '0' : '1';
+                };
+                
+                // Update on scroll
+                scroller.addEventListener('scroll', updateScrollHint);
+                
+                // Initial state
+                updateScrollHint();
+                
+                // Update on resize
+                window.addEventListener('resize', updateScrollHint);
+                
+                // Handle keyboard focus
+                scroller.addEventListener('focusin', (e) => {
+                    const productCard = e.target.closest('.product-card');
+                    if (productCard) {
+                        productCard.scrollIntoView({
+                            inline: 'nearest',
+                            block: 'nearest',
+                            behavior: 'smooth'
+                        });
+                    }
                 });
             });
         });
