@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <script src="https://static.readdy.ai/static/e.js"></script>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard</title>
+    <script src="https://cdn.tailwindcss.com/3.4.16"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.6.0/remixicon.min.css" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3b82f6',
+                        secondary: '#10b981'
+                    },
+                    borderRadius: {
+                        'none': '0px',
+                        'sm': '4px',
+                        DEFAULT: '8px',
+                        'md': '12px',
+                        'lg': '16px',
+                        'xl': '20px',
+                        '2xl': '24px',
+                        '3xl': '32px',
+                        'full': '9999px',
+                        'button': '8px'
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        :where([class^="ri-"])::before {
+            content: "\f3c2";
+        }
+
+        .sidebar-collapsed {
+            width: 4rem;
+        }
+
+        .sidebar-expanded {
+            width: 16rem;
+        }
+
+        .sidebar-text {
+            transition: opacity 0.3s ease;
+        }
+
+        .sidebar-collapsed .sidebar-text {
+            opacity: 0;
+            pointer-events: none;
+        }
+
+        .main-content-collapsed {
+            margin-left: 4rem;
+        }
+
+        .main-content-expanded {
+            margin-left: 16rem;
+        }
+
+        @media (max-width: 768px) {
+            .sidebar-expanded {
+                width: 100%;
+                position: fixed;
+                z-index: 50;
+                transform: translateX(0);
+            }
+
+            .sidebar-collapsed {
+                transform: translateX(-100%);
+            }
+
+            .main-content-collapsed,
+            .main-content-expanded {
+                margin-left: 0;
+            }
+        }
+
+        .hidden-page {
+            display: none;
+        }
+
+        /* Improved Login Page Styling */
+        .login-container {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #eef2ff;
+        }
+
+        .login-card {
+            background-color: white;
+            padding: 3rem;
+            border-radius: 16px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+            width: 100%;
+            max-width: 450px;
+            transition: transform 0.3s ease-in-out;
+            border: 1px solid #f0f4f8;
+        }
+
+        .login-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0, 0, 0, 0.1);
+        }
+
+        .logo {
+            font-family: 'Pacifico', cursive;
+        }
+
+        .form-input {
+            transition: all 0.2s ease-in-out;
+            border-radius: 8px;
+            border: 1px solid #e2e8f0;
+            padding: 0.75rem 1rem;
+            width: 100%;
+            background-color: #f8fafc;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+            box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.2);
+            background-color: white;
+        }
+
+        .login-button {
+            transition: all 0.3s ease-in-out;
+            border-radius: 8px;
+            background-color: #3b82f6;
+            color: white;
+            padding: 0.75rem;
+            width: 100%;
+            font-weight: 500;
+            box-shadow: 0 4px 15px rgba(59, 130, 246, 0.3);
+        }
+
+        .login-button:hover {
+            background-color: #2563eb;
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(59, 130, 246, 0.4);
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Login Page -->
+    <div id="loginPage" class="login-container">
+        <div class="login-card">
+            <div class="text-center mb-8">
+                <h1 class="logo text-5xl text-blue-600">
+                    Login
+                </h1>
+                <p class="text-gray-600 mt-2">
+                    Please log in to your dashboard
+                </p>
+            </div>
+            <form id="loginForm" class="space-y-6">
+                <div>
+                    <label for="email" class="block text-sm font-medium text-gray-700">Email</label>
+                    <input type="email" id="email" name="email" class="form-input mt-1">
+                </div>
+                <div>
+                    <label for="password" class="block text-sm font-medium text-gray-700">Password</label>
+                    <input type="password" id="password" name="password" class="form-input mt-1">
+                </div>
+                <div id="errorMessage" class="text-sm text-red-500 hidden text-center">
+                    Invalid email or password.
+                </div>
+                <div>
+                    <button type="submit" class="login-button">
+                        Log in
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+    <!-- End Login Page -->
+
+    <!-- Admin Dashboard -->
+    <div id="dashboardPage" class="hidden-page">
+        <!-- Top Navigation -->
+        <nav class="fixed top-0 left-0 right-0 bg-white shadow-sm border-b border-gray-200 z-40 h-16">
+            <div class="flex items-center justify-between h-full px-4">
+                <div class="flex items-center gap-4">
+                    <button id="sidebarToggle" class="lg:hidden w-8 h-8 flex items-center justify-center">
+                        <i class="ri-menu-line ri-lg"></i>
+                    </button>
+                    <div class="font-['Pacifico'] text-xl text-primary">logo</div>
+                </div>
+                <button id="logoutButton" class="!rounded-button whitespace-nowrap bg-red-500 text-white px-4 py-2 hover:bg-red-600 transition-colors">
+                    <div class="w-4 h-4 flex items-center justify-center inline-block mr-2">
+                        <i class="ri-logout-box-line"></i>
+                    </div>
+                    Logout
+                </button>
+            </div>
+        </nav>
+
+        <!-- Sidebar -->
+        <aside id="sidebar" class="fixed left-0 top-16 bottom-0 bg-white border-r border-gray-200 sidebar-expanded transition-all duration-300 z-30">
+            <nav class="p-4">
+                <ul class="space-y-2">
+                    <li>
+                        <button class="sidebar-item w-full flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors" data-section="sections">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-layout-grid-line"></i>
+                            </div>
+                            <span class="sidebar-text">Sections</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-item w-full flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors" data-section="products">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-shopping-bag-line"></i>
+                            </div>
+                            <span class="sidebar-text">Products</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-item w-full flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors" data-section="banners">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-image-line"></i>
+                            </div>
+                            <span class="sidebar-text">Banners</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-item w-full flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors" data-section="messages">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-message-line"></i>
+                            </div>
+                            <span class="sidebar-text">Contact Messages</span>
+                        </button>
+                    </li>
+                    <li>
+                        <button class="sidebar-item w-full flex items-center gap-3 px-3 py-2 text-gray-700 hover:bg-gray-100 rounded transition-colors" data-section="settings">
+                            <div class="w-5 h-5 flex items-center justify-center">
+                                <i class="ri-settings-line"></i>
+                            </div>
+                            <span class="sidebar-text">Settings</span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main id="mainContent" class="main-content-expanded transition-all duration-300 pt-16 min-h-screen">
+
+            <!-- Sections Page -->
+            <div id="sectionsPage" class="content-page p-6">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900">Sections Management</h1>
+                    <button class="!rounded-button whitespace-nowrap bg-primary text-white px-4 py-2 hover:bg-blue-600 transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center inline-block mr-2">
+                            <i class="ri-add-line"></i>
+                        </div>
+                        Add New Section
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Electronics</h3>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <label class="text-sm text-gray-600">Logo URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/electronics-logo.png</p>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-600">Banner URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/electronics-banner.jpg</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                            <button class="!rounded-button whitespace-nowrap bg-primary text-white px-3 py-1 text-sm hover:bg-blue-600 transition-colors">View Products</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Fashion</h3>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <label class="text-sm text-gray-600">Logo URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/fashion-logo.png</p>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-600">Banner URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/fashion-banner.jpg</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                            <button class="!rounded-button whitespace-nowrap bg-primary text-white px-3 py-1 text-sm hover:bg-blue-600 transition-colors">View Products</button>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow p-6">
+                        <h3 class="text-lg font-semibold text-gray-900 mb-4">Home & Garden</h3>
+                        <div class="space-y-3 mb-4">
+                            <div>
+                                <label class="text-sm text-gray-600">Logo URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/home-logo.png</p>
+                            </div>
+                            <div>
+                                <label class="text-sm text-gray-600">Banner URL:</label>
+                                <p class="text-sm text-gray-800 break-all">https://example.com/home-banner.jpg</p>
+                            </div>
+                        </div>
+                        <div class="flex gap-2 flex-wrap">
+                            <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                            <button class="!rounded-button whitespace-nowrap bg-primary text-white px-3 py-1 text-sm hover:bg-blue-600 transition-colors">View Products</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Products Page -->
+            <div id="productsPage" class="content-page p-6 hidden">
+                <div class="flex justify-between items-center mb-6">
+                    <h1 class="text-2xl font-bold text-gray-900">Products Management</h1>
+                    <button class="!rounded-button whitespace-nowrap bg-primary text-white px-4 py-2 hover:bg-blue-600 transition-colors">
+                        <div class="w-4 h-4 flex items-center justify-center inline-block mr-2">
+                            <i class="ri-add-line"></i>
+                        </div>
+                        Add New Product
+                    </button>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                            <span class="text-sm text-gray-500">https://example.com/laptop.jpg</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Gaming Laptop Pro</h3>
+                            <p class="text-sm text-gray-600 mb-4">High-performance gaming laptop with RTX graphics and 16GB RAM</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                                <button class="!rounded-button whitespace-nowrap bg-red-100 text-red-700 px-3 py-1 text-sm hover:bg-red-200 transition-colors">Delete</button>
+                                <button class="!rounded-button whitespace-nowrap bg-yellow-100 text-yellow-700 px-3 py-1 text-sm hover:bg-yellow-200 transition-colors">Out of Stock</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                            <span class="text-sm text-gray-500">https://example.com/smartphone.jpg</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Smartphone X</h3>
+                            <p class="text-sm text-gray-600 mb-4">Latest flagship smartphone with advanced camera system</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                                <button class="!rounded-button whitespace-nowrap bg-red-100 text-red-700 px-3 py-1 text-sm hover:bg-red-200 transition-colors">Delete</button>
+                                <button class="!rounded-button whitespace-nowrap bg-blue-100 text-blue-700 px-3 py-1 text-sm hover:bg-blue-200 transition-colors">Coming Soon</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                            <span class="text-sm text-gray-500">https://example.com/headphones.jpg</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Wireless Headphones</h3>
+                            <p class="text-sm text-gray-600 mb-4">Premium noise-canceling wireless headphones with 30-hour battery</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                                <button class="!rounded-button whitespace-nowrap bg-red-100 text-red-700 px-3 py-1 text-sm hover:bg-red-200 transition-colors">Delete</button>
+                                <button class="!rounded-button whitespace-nowrap bg-green-100 text-green-700 px-3 py-1 text-sm hover:bg-green-200 transition-colors">In Stock</button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm hover:shadow-md transition-shadow overflow-hidden">
+                        <div class="aspect-square bg-gray-100 flex items-center justify-center">
+                            <span class="text-sm text-gray-500">https://example.com/watch.jpg</span>
+                        </div>
+                        <div class="p-4">
+                            <h3 class="text-lg font-semibold text-gray-900 mb-2">Smart Watch</h3>
+                            <p class="text-sm text-gray-600 mb-4">Advanced fitness tracking smartwatch with GPS and heart rate monitor</p>
+                            <div class="flex gap-2 flex-wrap">
+                                <button class="!rounded-button whitespace-nowrap bg-gray-100 text-gray-700 px-3 py-1 text-sm hover:bg-gray-200 transition-colors">Edit</button>
+                                <button class="!rounded-button whitespace-nowrap bg-red-100 text-red-700 px-3 py-1 text-sm hover:bg-red-200 transition-colors">Delete</button>
+                                <button class="!rounded-button whitespace-nowrap bg-green-100 text-green-700 px-3 py-1 text-sm hover:bg-green-200 transition-colors">In Stock</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Banners Page -->
+            <div id="bannersPage" class="content-page p-6 hidden">
+                <div class="max-w-2xl mx-auto">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-6">Banner Management</h1>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+                        <form class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Landing Page Banner URL</label>
+                                <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="https://example.com/landing-banner.jpg" value="https://example.com/main-banner.jpg">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Electronics Section Banner URL</label>
+                                <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="https://example.com/electronics-banner.jpg" value="https://example.com/electronics-banner.jpg">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Fashion Section Banner URL</label>
+                                <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="https://example.com/fashion-banner.jpg" value="https://example.com/fashion-banner.jpg">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Home & Garden Section Banner URL</label>
+                                <input type="url" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="https://example.com/home-banner.jpg" value="https://example.com/home-banner.jpg">
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button type="submit" class="!rounded-button whitespace-nowrap bg-primary text-white px-6 py-2 hover:bg-blue-600 transition-colors">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Messages Page -->
+            <div id="messagesPage" class="content-page p-6 hidden">
+                <h1 class="text-2xl font-bold text-gray-900 mb-6">Contact Messages</h1>
+
+                <div class="bg-white rounded-lg border border-gray-200 shadow-sm overflow-hidden">
+                    <div class="overflow-x-auto">
+                        <table class="w-full">
+                            <thead class="bg-gray-50 border-b border-gray-200">
+                                <tr>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Email</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Message</th>
+                                    <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Date</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-gray-200">
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Sarah Johnson</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">sarah.johnson@email.com</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">I'm interested in your gaming laptop collection and would like to know more about warranty options and technical specifications for the Pro model.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">2024-01-15</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Michael Chen</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">m.chen@company.com</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">Hello, I'm looking for bulk purchase options for smartphones. Could you please provide pricing information for orders of 50+ units and available discounts?</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">2024-01-14</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Emma Rodriguez</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">emma.r@email.com</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">I received my wireless headphones yesterday and they're amazing! The sound quality is excellent and the noise cancellation works perfectly. Thank you for the fast shipping.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">2024-01-13</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">David Thompson</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">david.thompson@email.com</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">When will the new smart watch models be available? I'm particularly interested in the fitness tracking features and battery life improvements mentioned in your newsletter.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">2024-01-12</td>
+                                </tr>
+                                <tr class="hover:bg-gray-50">
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">Lisa Anderson</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">lisa.anderson@email.com</td>
+                                    <td class="px-6 py-4 text-sm text-gray-600">I'm having trouble with my recent order. The tracking information hasn't updated in three days and I need the laptop for an important presentation next week. Please help.</td>
+                                    <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-600">2024-01-11</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Settings Page -->
+            <div id="settingsPage" class="content-page p-6 hidden">
+                <div class="max-w-2xl mx-auto">
+                    <h1 class="text-2xl font-bold text-gray-900 mb-6">Settings</h1>
+
+                    <div class="bg-white rounded-lg border border-gray-200 shadow-sm p-6">
+                        <form id="settingsForm" class="space-y-6">
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Admin Email</label>
+                                <input type="email" id="adminEmail" name="adminEmail" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" value="admin@company.com">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Current Password</label>
+                                <input type="password" id="currentPassword" name="currentPassword" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="Enter current password to change">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">New Password</label>
+                                <input type="password" id="newPassword" name="newPassword" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="Enter new password">
+                            </div>
+
+                            <div>
+                                <label class="block text-sm font-medium text-gray-700 mb-2">Confirm New Password</label>
+                                <input type="password" id="confirmNewPassword" name="confirmNewPassword" class="w-full px-3 py-2 border border-gray-300 rounded focus:outline-none focus:border-primary text-sm" placeholder="Confirm new password">
+                            </div>
+
+                            <div class="flex justify-end">
+                                <button type="submit" class="!rounded-button whitespace-nowrap bg-primary text-white px-6 py-2 hover:bg-blue-600 transition-colors">
+                                    Save Changes
+                                </button>
+                            </div>
+                        </form>
+                        <div id="settingsMessage" class="mt-4 text-sm text-center hidden"></div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+    <!-- End Admin Dashboard -->
+
+    <script id="main-script">
+        document.addEventListener('DOMContentLoaded', function() {
+            const loginPage = document.getElementById('loginPage');
+            const dashboardPage = document.getElementById('dashboardPage');
+            const loginForm = document.getElementById('loginForm');
+            const errorMessage = document.getElementById('errorMessage');
+            const logoutButton = document.getElementById('logoutButton');
+            const settingsForm = document.getElementById('settingsForm');
+            const settingsMessage = document.getElementById('settingsMessage');
+
+            // Initial credentials
+            let adminEmail = 'admin@company.com';
+            let adminPassword = 'Password';
+
+            // Check for authentication on load
+            const loggedIn = sessionStorage.getItem('loggedIn');
+            if (loggedIn) {
+                showDashboard();
+            } else {
+                showLogin();
+            }
+
+            // --- Login and Logout Logic ---
+            loginForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+
+                if (email === adminEmail && password === adminPassword) {
+                    sessionStorage.setItem('loggedIn', 'true');
+                    errorMessage.classList.add('hidden');
+                    showDashboard();
+                } else {
+                    errorMessage.classList.remove('hidden');
+                }
+            });
+
+            logoutButton.addEventListener('click', () => {
+                sessionStorage.removeItem('loggedIn');
+                showLogin();
+            });
+
+            function showDashboard() {
+                loginPage.classList.add('hidden-page');
+                dashboardPage.classList.remove('hidden-page');
+            }
+
+            function showLogin() {
+                loginPage.classList.remove('hidden-page');
+                dashboardPage.classList.add('hidden-page');
+            }
+
+            // --- Sidebar and Content Navigation Logic ---
+            const sidebar = document.getElementById('sidebar');
+            const mainContent = document.getElementById('mainContent');
+            const sidebarToggle = document.getElementById('sidebarToggle');
+            const sidebarItems = document.querySelectorAll('.sidebar-item');
+            const contentPages = document.querySelectorAll('.content-page');
+
+            let sidebarExpanded = window.innerWidth >= 1024;
+
+            function updateSidebar() {
+                if (window.innerWidth < 768) {
+                    sidebar.classList.toggle('sidebar-collapsed', !sidebarExpanded);
+                    sidebar.classList.toggle('sidebar-expanded', sidebarExpanded);
+                } else {
+                    sidebar.classList.toggle('sidebar-collapsed', !sidebarExpanded);
+                    sidebar.classList.toggle('sidebar-expanded', sidebarExpanded);
+                    mainContent.classList.toggle('main-content-collapsed', !sidebarExpanded);
+                    mainContent.classList.toggle('main-content-expanded', sidebarExpanded);
+                }
+            }
+
+            sidebarToggle.addEventListener('click', function() {
+                sidebarExpanded = !sidebarExpanded;
+                updateSidebar();
+            });
+
+            window.addEventListener('resize', function() {
+                if (window.innerWidth >= 1024) {
+                    sidebarExpanded = true;
+                }
+                updateSidebar();
+            });
+
+            updateSidebar();
+
+            sidebarItems.forEach(item => {
+                item.addEventListener('click', function() {
+                    const section = this.getAttribute('data-section');
+
+                    sidebarItems.forEach(si => {
+                        si.classList.remove('bg-primary', 'text-white');
+                        si.classList.add('text-gray-700');
+                    });
+
+                    this.classList.remove('text-gray-700');
+                    this.classList.add('bg-primary', 'text-white');
+
+                    contentPages.forEach(page => page.classList.add('hidden'));
+
+                    const targetPage = document.getElementById(section + 'Page');
+                    if (targetPage) {
+                        targetPage.classList.remove('hidden');
+                    }
+
+                    if (window.innerWidth < 768) {
+                        sidebar.classList.add('sidebar-collapsed');
+                        sidebar.classList.remove('sidebar-expanded');
+                    }
+                });
+            });
+
+            // Set initial page to Sections on dashboard load
+            const initialSidebarItem = document.querySelector('.sidebar-item[data-section="sections"]');
+            if (initialSidebarItem) {
+                initialSidebarItem.click();
+            }
+
+            // --- Settings Page Logic ---
+            const adminEmailInput = document.getElementById('adminEmail');
+            adminEmailInput.value = adminEmail;
+
+            settingsForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const currentPasswordInput = document.getElementById('currentPassword');
+                const newPasswordInput = document.getElementById('newPassword');
+                const confirmNewPasswordInput = document.getElementById('confirmNewPassword');
+                const newEmail = adminEmailInput.value;
+                const currentPassword = currentPasswordInput.value;
+                const newPassword = newPasswordInput.value;
+                const confirmNewPassword = confirmNewPasswordInput.value;
+
+                settingsMessage.classList.remove('hidden', 'text-red-500', 'text-green-500');
+
+                if (currentPassword !== adminPassword) {
+                    settingsMessage.textContent = 'Error: Incorrect current password.';
+                    settingsMessage.classList.add('text-red-500');
+                    settingsMessage.classList.remove('hidden');
+                    return;
+                }
+
+                if (newPassword && newPassword !== confirmNewPassword) {
+                    settingsMessage.textContent = 'Error: New passwords do not match.';
+                    settingsMessage.classList.add('text-red-500');
+                    settingsMessage.classList.remove('hidden');
+                    return;
+                }
+
+                // Update email and/or password
+                adminEmail = newEmail;
+                if (newPassword) {
+                    adminPassword = newPassword;
+                }
+
+                settingsMessage.textContent = 'Settings updated successfully!';
+                settingsMessage.classList.add('text-green-500');
+                settingsMessage.classList.remove('hidden');
+
+                // Clear password fields
+                currentPasswordInput.value = '';
+                newPasswordInput.value = '';
+                confirmNewPasswordInput.value = '';
+            });
+        });
+    </script>
+</body>
+
+</html>
